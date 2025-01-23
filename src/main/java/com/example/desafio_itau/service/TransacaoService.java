@@ -1,6 +1,7 @@
 package com.example.desafio_itau.service;
 
 import com.example.desafio_itau.entidade.Transacao;
+import com.example.desafio_itau.service.exceptions.UnprocessableEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ public class TransacaoService {
     private final List<Transacao> transacoes = new ArrayList<>();
 
     public void addTransacao(Transacao transacao){
+        if (transacao.valor() < 0)
+            throw new UnprocessableEntity("O valor precisa ser positivo");
+
         transacoes.add(transacao);
     }
 
