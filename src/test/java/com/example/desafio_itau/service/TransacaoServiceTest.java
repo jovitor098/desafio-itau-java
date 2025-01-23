@@ -45,4 +45,15 @@ class TransacaoServiceTest {
         Transacao transacao = new Transacao(10.0, OffsetDateTime.now().plusHours(1));
         assertThrows(UnprocessableEntity.class, () -> transacaoService.addTransacao(transacao));
     }
+
+    @Test
+    void verificarExcecaoValoresNull(){
+        Transacao transacao = new Transacao(null, OffsetDateTime.now());
+        Transacao finalTransacao = transacao;
+        assertThrows(UnprocessableEntity.class, () -> transacaoService.addTransacao(finalTransacao));
+
+        transacao = new Transacao(10.0, null);
+        Transacao finalTransacao1 = transacao;
+        assertThrows(UnprocessableEntity.class, () -> transacaoService.addTransacao(finalTransacao1));
+    }
 }
