@@ -10,5 +10,7 @@ import java.util.List;
 public class TransacaoService {
     private final List<Transacao> transacoes = new ArrayList<>();
 
-    
+    public void addTransacao(Transacao transacao){
+        transacoes.add(transacao);
+    }
 }
