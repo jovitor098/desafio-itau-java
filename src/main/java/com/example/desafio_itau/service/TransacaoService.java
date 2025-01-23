@@ -13,4 +13,8 @@ public class TransacaoService {
     public void addTransacao(Transacao transacao){
         transacoes.add(transacao);
     }
+
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
 }
