@@ -13,8 +13,15 @@ public class TransacaoService {
     private final List<Transacao> transacoes = new ArrayList<>();
 
     public void addTransacao(Transacao transacao){
+        if (transacao.valor() ==  null)
+            throw new UnprocessableEntity("O valor precisa ser preechido");
+
+        if (transacao.dataHora() ==  null)
+            throw new UnprocessableEntity("A data precisa ser preechido");
+
         if (transacao.valor() < 0)
             throw new UnprocessableEntity("O valor precisa ser positivo");
+
         if(transacao.dataHora().isAfter(OffsetDateTime.now()))
             throw new UnprocessableEntity("Data da transação precisa ser no passado");
 
