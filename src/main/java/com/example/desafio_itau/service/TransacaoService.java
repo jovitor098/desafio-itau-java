@@ -28,6 +28,10 @@ public class TransacaoService {
         transacoes.add(transacao);
     }
 
+    public void apagarTransacoes(){
+        transacoes.clear();
+    }
+
     public List<Transacao> getTransacoes() {
         return transacoes;
     }
