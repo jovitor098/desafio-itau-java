@@ -38,7 +38,7 @@ class TransacaoControllerTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(transacaoController)
                 .setControllerAdvice(GlobalExceptionHandler.class)
@@ -50,12 +50,12 @@ class TransacaoControllerTest {
     @Test
     void criarTransacaoCorreta() throws Exception {
         Transacao transacao = new Transacao(10.0, OffsetDateTime.now());
-        String json = objectMapper.writeValueAsString(transacao);
+        String json = transacaoParaJson(transacao);
         mockMvc.perform(
-                post("/transacao")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isCreated());
+                       post("/transacao")
+                               .contentType(MediaType.APPLICATION_JSON)
+                               .content(json))
+               .andExpect(status().isCreated());
     }
 
     @Test
@@ -64,11 +64,15 @@ class TransacaoControllerTest {
                 .when(transacaoService)
                 .addTransacao(any());
         Transacao transacao = new Transacao(-10.0, OffsetDateTime.now());
-        String json = objectMapper.writeValueAsString(transacao);
+        String json = transacaoParaJson(transacao);
         mockMvc.perform(
                        post("/transacao")
                                .contentType(MediaType.APPLICATION_JSON)
                                .content(json))
                .andExpect(status().isUnprocessableEntity());
+    }
+
+    private String transacaoParaJson(Transacao transacao) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(transacao);
     }
 }
