@@ -45,7 +45,6 @@ class TransacaoControllerTest {
                 .build();
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-
     }
 
     @Test
