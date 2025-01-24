@@ -56,4 +56,12 @@ class TransacaoServiceTest {
         Transacao finalTransacao1 = transacao;
         assertThrows(UnprocessableEntity.class, () -> transacaoService.addTransacao(finalTransacao1));
     }
+
+    @Test
+    void apagarTodasAsTransacoes(){
+        Transacao transacao = new Transacao(10.0, OffsetDateTime.now());
+        transacaoService.addTransacao(transacao);
+        transacaoService.apagarTransacoes();
+        assertEquals(0, transacaoService.getTransacoes().size());
+    }
 }
